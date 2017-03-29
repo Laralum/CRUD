@@ -1,0 +1,8 @@
+{
+    "items": [
+        {
+            "trans": "laralum_CRUD::general.tables",
+            "route": "laralum::CRUD.tables.index"
+        }
+    ]
+}
