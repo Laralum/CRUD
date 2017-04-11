@@ -1,6 +1,7 @@
 <?php
 
 namespace Laralum\CRUD\Controllers;
+use Illuminate\Support\Facades\Schema;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Laralum\Users\Models\User;
@@ -50,7 +51,7 @@ class TableController extends Controller
         $tables = array_map('reset', \DB::select('SHOW TABLES'));
         if (! in_array($id, array_keys($tables))) {
             return redirect()->route('laralum::CRUD.tables.index')
-                ->with('error', __('laralum_CRUD::general.table_not_exists'));
+                ->with('error', __('laralum_CRUD::general.table_not_exists', ['id' => $id]));
         }
         $rows = \DB::table($tables[$id])->get();
         $columns = \DB::connection()
@@ -96,7 +97,17 @@ class TableController extends Controller
      */
     public function confirmDestroy($id)
     {
-        //
+        $tables = array_map('reset', \DB::select('SHOW TABLES'));
+        if (! in_array($id, array_keys($tables))) {
+            return redirect()->route('laralum::CRUD.tables.index')
+                ->with('error', __('laralum_CRUD::general.table_not_exists', ['id' => $id]));
+        }
+        return view('laralum::pages.confirmation', [
+            'method' => 'DELETE',
+            'message' => __('laralum_CRUD::general.confirm_del_table', ['name' => $tables[$id]]),
+            'description' => __('laralum_CRUD::general.confirm_desc'),
+            'action' => route('laralum::CRUD.tables.destroy', ['table' => $id]),
+        ]);
     }
 
     /**
@@ -107,6 +118,14 @@ class TableController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tables = array_map('reset', \DB::select('SHOW TABLES'));
+        if (! in_array($id, array_keys($tables))) {
+            return redirect()->route('laralum::CRUD.tables.index')
+                ->with('error', __('laralum_CRUD::general.table_not_exists', ['id' => $id]));
+        }
+        Schema::drop($tables[$id]);
+
+        return redirect()->route('laralum::CRUD.tables.index')
+            ->with('success', __('laralum_CRUD::general.table_deleted', ['name' => $tables[$id]]));
     }
 }
