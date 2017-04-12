@@ -16,7 +16,7 @@ class TableController extends Controller
     public function index()
     {
         $tables = array_map('reset', \DB::select('SHOW TABLES'));
-        return view('laralum_CRUD::index', ['tables' => $tables]);
+        return view('laralum_CRUD::tables.index', ['tables' => $tables]);
     }
 
     /**
@@ -58,7 +58,7 @@ class TableController extends Controller
             ->getSchemaBuilder()
             ->getColumnListing($tables[$id]);
 
-        return view('laralum_CRUD::show', [
+        return view('laralum_CRUD::tables.show', [
             'id' => $id,
             'name' => $tables[$id],
             'columns' => $columns,
@@ -74,7 +74,13 @@ class TableController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tables = array_map('reset', \DB::select('SHOW TABLES'));
+        if (! in_array($id, array_keys($tables))) {
+            return redirect()->route('laralum::CRUD.tables.index')
+                ->with('error', __('laralum_CRUD::general.table_not_exists', ['id' => $id]));
+        }
+
+        return view('laralum_CRUD::tables.edit', ['name' => $tables[$id], 'id' => $id]);
     }
 
     /**
@@ -86,7 +92,23 @@ class TableController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $tables = array_map('reset', \DB::select('SHOW TABLES'));
+        if (! in_array($id, array_keys($tables))) {
+            return redirect()->route('laralum::CRUD.tables.index')
+                ->with('error', __('laralum_CRUD::general.table_not_exists', ['id' => $id]));
+        }
+        $this->validate($request, [
+            'name' => 'required'
+        ]);
+        if (in_array($request->name, $tables)) {
+            return redirect()->route('laralum::CRUD.tables.index')
+                ->with('error', __('laralum_CRUD::general.table_name_exists', ['name' => $request->name]));
+        }
+
+        Schema::rename($tables[$id], $request->name);
+
+        return redirect()->route('laralum::CRUD.tables.index')
+            ->with('success', __('laralum_CRUD::general.table_updated', ['id' => $id]));
     }
 
     /**

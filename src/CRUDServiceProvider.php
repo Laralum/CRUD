@@ -4,12 +4,20 @@ namespace Laralum\CRUD;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Gate;
-
-use Laralum\CRUD\Policies\ViewPolicy;
+use Laralum\CRUD\Models\Table;
+use Laralum\CRUD\Policies\TablePolicy;
 use Laralum\Permissions\PermissionsChecker;
 
 class CRUDServiceProvider extends ServiceProvider
 {
+    /**
+     * The policy mappings for the application.
+     *
+     * @var array
+     */
+    protected $policies = [
+        Table::class => TablePolicy::class,
+    ];
 
     /**
      * The mandatory permissions for the module.
@@ -56,9 +64,9 @@ class CRUDServiceProvider extends ServiceProvider
      */
     public function registerPolicies()
     {
-        // foreach ($this->policies as $key => $value) {
-        //     Gate::policy($key, $value);
-        // }
+        foreach ($this->policies as $key => $value) {
+            Gate::policy($key, $value);
+        }
     }
 
 

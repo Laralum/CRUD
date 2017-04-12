@@ -1,11 +1,11 @@
 <?php
 
-namespace Laralum\Statistics\Policies;
+namespace Laralum\CRUD\Policies;
 
 use Laralum\Users\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ViewPolicy
+class TablePolicy
 {
     use HandlesAuthorization;
 
