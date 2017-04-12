@@ -1,20 +1,13 @@
 @extends('laralum::layouts.master')
-@section('icon', 'ion-stats-bars')
-@section('title', __('laralum_CRUD::general.CRUD'))
-@section('subtitle', __('laralum_CRUD::general.CRUD_desc'))
+@section('icon', 'ion-soup-can')
+@section('title', __('laralum_CRUD::general.tables'))
+@section('subtitle', __('laralum_CRUD::general.tables_desc'))
 @section('breadcrumb')
     <ul class="uk-breadcrumb">
         <li><a href="{{ route('laralum::index') }}">@lang('laralum_CRUD::general.home')</a></li>
         <li><span>@lang('laralum_CRUD::general.tables')</span></li>
     </ul>
 @endsection
-{{-- @section('content')
-@foreach ($tables as )
-    {{$table}}
-    <a href="{{ route('laralum::CRUD.tables.show', ['table' => $key]) }}">VIEW</a>
-    <br>
-@endforeach
-@endsection --}}
 @section('content')
     <div class="uk-container uk-container-large">
         <div uk-grid>
@@ -34,19 +27,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse($tables as $key => $table)
+                                    @forelse($tables as $table)
                                         <tr>
                                             <td>{{ $table }}</td>
                                             <td class="uk-table-shrink">
                                                 <div class="uk-button-group">
-                                                    <a class="uk-button uk-button-default uk-button-small" href="{{ route('laralum::CRUD.tables.show', ['id' => $key]) }}">
+                                                    <a class="uk-button uk-button-default uk-button-small" href="{{ route('laralum::CRUD.row.index', ['table' => $table]) }}">
                                                         @lang('laralum_CRUD::general.view')
-                                                    </a>
-                                                    <a class="uk-button uk-button-default uk-button-small" href="{{ route('laralum::CRUD.tables.edit', ['id' => $key]) }}">
-                                                        @lang('laralum_CRUD::general.edit')
-                                                    </a>
-                                                    <a class="uk-button uk-button-danger uk-button-small" href="{{ route('laralum::CRUD.tables.destroy.confirm', ['id' => $key]) }}">
-                                                        @lang('laralum_CRUD::general.delete')
                                                     </a>
                                                 </div>
                                             </td>

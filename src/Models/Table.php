@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Laralum\CRUD\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

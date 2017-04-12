@@ -8,21 +8,22 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'home'    => 'Home',
-    'name'    => 'Name',
-    'edit'    => 'Edit',
-    'delete'  => 'Delete',
-    'view'    => 'View',
-    'update'  => 'Update',
-    'tables'  => 'Tables',
-    'actions' => 'Actions',
+    'home'              => 'Home',
+    'name'              => 'Name',
+    'edit'              => 'Edit',
+    'delete'            => 'Delete',
+    'view'              => 'View',
+    'update'            => 'Update',
+    'tables'            => 'Tables',
+    'tables_desc'       => 'View and manage database tables',
+    'actions'           => 'Actions',
+    'rows_desc'         => 'View and manage the table rows',
+    'row_data'          => 'Row Data',
+    'table_name'        => 'Table Name',
+    'table_rows'        => 'Table Rows',
+    'table_data'        => 'Table Data',
 
-    'CRUD'         => 'CRUD',
-    'CRUD_desc'    => 'CRUD DESCRIPTION',
-
-    'table_not_exists'  => 'Whops! There are no table for id = :id',
-    'table_deleted'  => '":name" table deleted successfuly!',
-
-    'confirm_del_table'      => 'Are you sure you want delete table ":name" ?',
-    'confirm_desc' => 'This action can break down your website',
+    'row_deleted'       => 'Row Deleted!',
+    'row_created'       => 'Row Created!',
+    'row_edited'        => 'Row Edited!',
 ];
