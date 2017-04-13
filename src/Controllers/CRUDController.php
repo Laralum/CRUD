@@ -61,7 +61,13 @@ class CRUDController extends Controller
         $columns = Schema::getColumnListing($table);
 
         foreach ($columns as $c) {
-            $row->$c = $request->$c;
+            $type = Schema::getColumnType($table, $c);
+
+            if ($type == 'boolean') {
+                $row->$c = $request->$c && $request->$c;
+            } else {
+                $row->$c = $request->$c;
+            }
         }
 
         $row->save();
@@ -113,7 +119,13 @@ class CRUDController extends Controller
         $columns = $r[1];
 
         foreach ($columns as $c) {
-            $row->$c = $request->$c;
+            $type = Schema::getColumnType($table, $c);
+
+            if ($type == 'boolean') {
+                $row->$c = $request->$c && $request->$c;
+            } else {
+                $row->$c = $request->$c;
+            }
         }
 
         $row->save();

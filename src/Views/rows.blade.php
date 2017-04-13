@@ -18,6 +18,10 @@
                         @lang('laralum_CRUD::general.tables')
                     </div>
                     <div class="uk-card-body">
+                        <a class="uk-button uk-button-primary" href="{{ route('laralum::CRUD.row.create', ['table' => $table]) }}">
+                            Create Row
+                        </a>
+                        <br /><br />
                         <div class="uk-overflow-auto">
                             <table class="uk-table uk-table-striped">
                                 <thead>
@@ -32,7 +36,13 @@
                                     @forelse($rows as $row)
                                         <tr>
                                             @foreach ($columns as $column)
-                                                <td>{{ $row->$column }}</td>
+                                                <td>
+                                                    @if (\Schema::getColumnType($table, $column) == 'boolean')
+                                                        <code>{{ $row->$column ? 'true' : 'false' }}</code>
+                                                    @else
+                                                        {{ $row->$column }}
+                                                    @endif
+                                                </td>
                                             @endforeach
                                             <td class="uk-table-shrink">
                                                 <div class="uk-button-group">

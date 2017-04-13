@@ -1,13 +1,13 @@
 @extends('laralum::layouts.master')
 @section('icon', 'ion-clipboard')
-@section('title', __('laralum_CRUD::general.edit') . " #" . $row->getKey())
+@section('title', __('laralum_CRUD::general.create'))
 @section('subtitle', __('laralum_CRUD::general.rows_desc'))
 @section('breadcrumb')
     <ul class="uk-breadcrumb">
         <li><a href="{{ route('laralum::index') }}">@lang('laralum_CRUD::general.home')</a></li>
         <li><a href="{{ route('laralum::CRUD.index') }}">@lang('laralum_CRUD::general.tables')</a></li>
         <li><a href="{{ route('laralum::CRUD.row.index', ['table' => $table]) }}">{{ $table }}</a></li>
-        <li><span>@lang('laralum_CRUD::general.edit') #{{ $row->getKey() }}</span></li>
+        <li><span>@lang('laralum_CRUD::general.create')</span></li>
     </ul>
 @endsection
 @section('content')
@@ -17,9 +17,8 @@
             <div class="uk-width-1-1@s uk-width-3-5@l">
                 <div class="uk-card uk-card-default">
                     <div class="uk-card-body">
-                        <form action="{{ route('laralum::CRUD.row.update', ['table' => $table, 'key' => $row->getKey()]) }}" class="uk-form-stacked" method="POST">
+                        <form action="{{ route('laralum::CRUD.row.store', ['table' => $table]) }}" class="uk-form-stacked" method="POST">
                             {{ csrf_field() }}
-                            {{ method_field('PUT') }}
                             <div class="uk-margin">
                                 <div uk-grid class="uk-grid-small">
                                     @foreach ($columns as $column)
@@ -31,7 +30,7 @@
                                         <div class="uk-width-1-1">
                                             <label class="uk-form-label">{{ $column }}</label>
                                             <div class="uk-form-controls">
-                                                <input  value="{{ old($column, $row->$column) }}" name="{{ $column }}" class="uk-input" type="number">
+                                                <input  name="{{ $column }}" class="uk-input" type="number">
                                             </div>
                                         </div>
 
@@ -41,7 +40,7 @@
                                             <div class="uk-width-1-1">
                                                 <label class="uk-form-label">{{ $column }}</label>
                                                 <div class="uk-form-controls">
-                                                    <input  value="{{ old($column, $row->$column) }}" step="any" name="{{ $column }}" class="uk-input" type="number">
+                                                    <input  step="any" name="{{ $column }}" class="uk-input" type="number">
                                                 </div>
                                             </div>
 
@@ -51,7 +50,7 @@
                                             <div class="uk-width-1-1">
                                                 <label class="uk-form-label">{{ $column }}</label>
                                                 <div class="uk-form-controls">
-                                                    <textarea  name="{{ $column }}" rows="5" class="uk-textarea">{{ old($column, $row->$column) }}</textarea>
+                                                    <textarea  name="{{ $column }}" rows="5" class="uk-textarea"></textarea>
                                                 </div>
                                             </div>
 
@@ -61,7 +60,7 @@
                                             <div class="uk-width-1-1">
                                                 <label class="uk-form-label">{{ $column }}</label>
                                                 <div class="uk-form-controls">
-                                                    <label><input name="{{ $column }}" @if($row->$column) checked @endif class="uk-checkbox" type="checkbox">
+                                                    <label><input name="{{ $column }}" class="uk-checkbox" type="checkbox">
                                                         {{ $column }}
                                                     </label><br />
                                                 </div>
@@ -73,7 +72,7 @@
                                             <div class="uk-width-1-1">
                                                 <label class="uk-form-label">{{ $column }}</label>
                                                 <div class="uk-form-controls">
-                                                    <input  value="{{ old($column, $row->$column) }}" name="{{ $column }}" class="uk-input" type="text">
+                                                    <input  name="{{ $column }}" class="uk-input" type="text">
                                                 </div>
                                             </div>
 
@@ -81,7 +80,7 @@
                                     @endforeach
                                     <div class="uk-width-1-1">
                                         <button type="submit" class="uk-button uk-button-primary">
-                                            <span class="ion-forward"></span>&nbsp; @lang('laralum_CRUD::general.save_row')
+                                            <span class="ion-forward"></span>&nbsp; @lang('laralum_CRUD::general.create_row')
                                         </button>
                                     </div>
                                 </div>

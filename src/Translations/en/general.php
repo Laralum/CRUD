@@ -22,6 +22,8 @@ return [
     'table_name'        => 'Table Name',
     'table_rows'        => 'Table Rows',
     'table_data'        => 'Table Data',
+    'create_row'        => 'Create Row',
+    'save_row'          => 'Save Row',
 
     'row_deleted'       => 'Row Deleted!',
     'row_created'       => 'Row Created!',
