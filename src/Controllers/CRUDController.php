@@ -1,10 +1,11 @@
 <?php
 
 namespace Laralum\CRUD\Controllers;
+
 use App\Http\Controllers\Controller;
+use DB;
 use Illuminate\Http\Request;
 use Laralum\CRUD\Models\Table;
-use DB;
 use Schema;
 
 class CRUDController extends Controller
@@ -22,14 +23,15 @@ class CRUDController extends Controller
     }
 
     /**
-     * Display the rows from the table
+     * Display the rows from the table.
      *
      * @param string $table
+     *
      * @return \Illuminate\Http\Response
      */
     public function rows($table)
     {
-        $rows = with(new Table)->setTable($table)->get();
+        $rows = with(new Table())->setTable($table)->get();
         $columns = Schema::getColumnListing($table);
 
         return view('laralum_CRUD::rows', ['table' => $table, 'rows' => $rows, 'columns' => $columns]);
@@ -39,6 +41,7 @@ class CRUDController extends Controller
      * Show the form for creating a new resource.
      *
      * @param string $table
+     *
      * @return \Illuminate\Http\Response
      */
     public function create($table)
@@ -51,13 +54,14 @@ class CRUDController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param string $table
-     * @param  \Illuminate\Http\Request  $request
+     * @param string                   $table
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, $table)
     {
-        $row = with(new Table)->setTable($table);
+        $row = with(new Table())->setTable($table);
         $columns = Schema::getColumnListing($table);
 
         foreach ($columns as $c) {
@@ -79,7 +83,8 @@ class CRUDController extends Controller
      * Display the specified resource.
      *
      * @param string $table
-     * @param  int  $key
+     * @param int    $key
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($table, $key)
@@ -93,7 +98,8 @@ class CRUDController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param string $table
-     * @param  int  $key
+     * @param int    $key
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($table, $key)
@@ -106,9 +112,10 @@ class CRUDController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param string $table
-     * @param  int  $key
+     * @param \Illuminate\Http\Request $request
+     * @param string                   $table
+     * @param int                      $key
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $table, $key)
@@ -130,14 +137,15 @@ class CRUDController extends Controller
 
         $row->save();
 
-        return redirect()->route('laralum::CRUD.row.index', ['table' => $table])->with('success', __('laralum_CRUD::general.row_edited'));;
+        return redirect()->route('laralum::CRUD.row.index', ['table' => $table])->with('success', __('laralum_CRUD::general.row_edited'));
     }
 
     /**
      * Confirm remove the specified resource from storage.
      *
      * @param string $table
-     * @param int $key
+     * @param int    $key
+     *
      * @return \Illuminate\Http\Response
      */
     public function confirmDelete($table, $key)
@@ -151,7 +159,8 @@ class CRUDController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($table, $key)
@@ -166,15 +175,16 @@ class CRUDController extends Controller
     }
 
     /**
-     * Get the row and the columns of the specified table key
+     * Get the row and the columns of the specified table key.
      *
      * @param string $table
-     * @param  int  $key
+     * @param int    $key
+     *
      * @return array
      */
     public function getRowAndColumns($table, $key)
     {
-        $raw_row = with(new Table)->setTable($table);
+        $raw_row = with(new Table())->setTable($table);
         $row = $raw_row->where($raw_row->getKeyName(), $key)->first();
         $columns = Schema::getColumnListing($table);
 
