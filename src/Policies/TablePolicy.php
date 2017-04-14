@@ -2,8 +2,8 @@
 
 namespace Laralum\CRUD\Policies;
 
-use Laralum\Users\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Laralum\Users\Models\User;
 
 class TablePolicy
 {
@@ -25,7 +25,8 @@ class TablePolicy
     /**
      * Determine if the current user can access statistics moule.
      *
-     * @param  mixed $user
+     * @param mixed $user
+     *
      * @return bool
      */
     public function access($user)

@@ -2,8 +2,8 @@
 
 namespace Laralum\CRUD;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\ServiceProvider;
 use Laralum\CRUD\Models\Table;
 use Laralum\CRUD\Policies\TablePolicy;
 use Laralum\Permissions\PermissionsChecker;
@@ -28,8 +28,8 @@ class CRUDServiceProvider extends ServiceProvider
         [
             'name' => 'CRUD Access',
             'slug' => 'laralum::CRUD.access',
-            'desc' => "Grants access to laralum/CRUD module",
-        ]
+            'desc' => 'Grants access to laralum/CRUD module',
+        ],
     ];
 
     /**
@@ -52,11 +52,10 @@ class CRUDServiceProvider extends ServiceProvider
 
         // Make sure the permissions are OK
         PermissionsChecker::check($this->permissions);
-
     }
 
     /**
-     * I cheated this comes from the AuthServiceProvider extended by the App\Providers\AuthServiceProvider
+     * I cheated this comes from the AuthServiceProvider extended by the App\Providers\AuthServiceProvider.
      *
      * Register the application's policies.
      *
@@ -68,7 +67,6 @@ class CRUDServiceProvider extends ServiceProvider
             Gate::policy($key, $value);
         }
     }
-
 
     /**
      * Register the application services.
