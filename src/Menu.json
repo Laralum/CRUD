@@ -1,6 +1,7 @@
 {
     "items": [
         {
+            "permission" : "laralum::CRUD.access",
             "trans": "laralum_CRUD::general.tables",
             "route": "laralum::CRUD.index"
         }
