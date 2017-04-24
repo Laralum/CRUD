@@ -2,7 +2,7 @@
     "name": "laralum/crud",
     "description": "CRUD module for laralum",
     "require": {
-		"laralum/laralum": "1.0"
+		"laralum/laralum": "1.*"
 	},
     "license": "MIT",
     "authors": [
