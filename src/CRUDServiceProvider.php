@@ -48,8 +48,6 @@ class CRUDServiceProvider extends ServiceProvider
             require __DIR__.'/Routes/web.php';
         }
 
-        $this->loadMigrationsFrom(__DIR__.'/Migrations');
-
         // Make sure the permissions are OK
         PermissionsChecker::check($this->permissions);
     }
