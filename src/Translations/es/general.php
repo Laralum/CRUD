@@ -14,7 +14,7 @@ return [
     'delete'      => 'Borrar',
     'view'        => 'Ver',
     'update'      => 'Actualizar',
-    'tables'      => 'Mesas',
+    'tables'      => 'Tablas',
     'tables_desc' => 'Ver y administrar tablas de bases de datos',
     'actions'     => 'Comportamiento',
     'rows_desc'   => 'Ver y administrar las filas de la tabla',
